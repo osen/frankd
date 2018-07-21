@@ -27,6 +27,7 @@ add_executable(frankd
   src/util.cpp
   src/Monster.cpp
   src/Foot.cpp
+  src/Background.cpp
 )
 
 target_link_libraries(frankd SDL2 GLD ws plank ws2_32)

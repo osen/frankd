@@ -3,6 +3,7 @@
 #include "util.h"
 #include "Monster.h"
 #include "Foot.h"
+#include "Background.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -35,6 +36,7 @@ void draw(int id)
 
 
   Camera::inst->draw();
+  Background::inst->draw();
   Mob::inst->draw();
   Monster::inst->draw();
 
@@ -48,6 +50,11 @@ void load_resources()
   Mob::texture = util::sdl_loadtexture("resources/mob.png");
   Foot::texture = util::sdl_loadtexture("resources/foot.png");
   Monster::texture = util::sdl_loadtexture("resources/body.png");
+  Background::grounds.push_back(util::sdl_loadtexture("resources/ground1.png"));
+  Background::grounds.push_back(util::sdl_loadtexture("resources/ground2.png"));
+  Background::skys.push_back(util::sdl_loadtexture("resources/sky1.png"));
+  Background::backgrounds.push_back(util::sdl_loadtexture("resources/background1.png"));
+  Background::backgrounds.push_back(util::sdl_loadtexture("resources/background2.png"));
 
   f.load("resources/font.png");
 }

@@ -28,6 +28,48 @@ namespace util
     SDL_Quit();
   }
 
+  bool colliding(SDL_Rect& a, SDL_Rect& b)
+  {
+    bool cX = false;
+    bool cY = false;
+
+    if(a.x < b.x)
+    {
+      if(a.x + a.w >= b.x)
+      {
+        cX = true;
+      }
+    }
+    else
+    {
+      if(b.x + b.w >= a.x)
+      {
+        cX = true;
+      }
+    }
+
+    if(!cX) return false;
+
+    if(a.y < b.y)
+    {
+      if(a.y + a.h >= b.y)
+      {
+        cY = true;
+      }
+    }
+    else
+    {
+      if(b.y + b.h >= a.y)
+      {
+        cY = true;
+      }
+    }
+
+    if(!cY) return false;
+
+    return true;
+  }
+
   void error(std::string message)
   {
     std::cout << "Error: " << message << std::endl;

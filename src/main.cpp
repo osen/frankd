@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "Apple.h"
 #include "util.h"
+#include "Monster.h"
+#include "Foot.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -20,6 +22,8 @@ void update()
   {
     it->update();
   }
+
+  Monster::inst->update();
 }
 
 void draw(int id)
@@ -43,6 +47,8 @@ void draw(int id)
     it->draw();
   }
 
+  Monster::inst->draw();
+
   std::stringstream ss;
   ss << "Player: " << id;
   f.draw(ss.str(), 500, 50);
@@ -52,6 +58,8 @@ void load_resources()
 {
   Player::ss = util::SpritesheetLoad("resources/link.png", 10, 8);
   Apple::texture = util::sdl_loadtexture("resources/heart.png");
+  Foot::texture = util::sdl_loadtexture("resources/foot.png");
+  Monster::texture = util::sdl_loadtexture("resources/body.png");
 
   f.load("resources/font.png");
 }
@@ -75,6 +83,8 @@ int main()
   Player::all.push_back(Player(4));
 
   Apple::all.push_back(Apple());
+
+  Monster::inst = std::make_shared<Monster>();
 
   SDL_Event e = {0};
   bool quit = false;

@@ -18,11 +18,19 @@ struct Spritesheet
   int h;
 };
 
+struct Vec2
+{
+  float x;
+  float y;
+};
+
 extern SDL_Window* sdl_window;
 extern SDL_Surface* sdl_screen;
 extern SDL_Renderer* sdl_renderer;
 extern bool should_exit;
 extern double delta_time;
+
+bool colliding(SDL_Rect& a, SDL_Rect& b);
 
 void sdl_initialize(std::string title, int width, int height);
 void update_deltatime();

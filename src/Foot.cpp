@@ -1,6 +1,7 @@
 #include "Foot.h"
 #include "util.h"
 #include "Monster.h"
+#include "Camera.h"
 
 #include <iostream>
 
@@ -119,9 +120,10 @@ bool Foot::hasPressure()
 
 void Foot::draw()
 {
+  glm::vec2 offset = Camera::inst->getOffset();
   SDL_Rect r = { 0 };
-  r.x = pos.x;
-  r.y = pos.y;
+  r.x = pos.x + offset.x;
+  r.y = pos.y + offset.y;
   SDL_QueryTexture(texture, NULL, NULL, &r.w, &r.h);
   SDL_RenderCopy(util::sdl_renderer, texture, NULL, &r);
 }

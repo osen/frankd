@@ -1,14 +1,17 @@
 #include "util.h"
+#include "glm/glm.hpp"
 
 #include <vector>
 
-class Apple
+class Mob
 {
 public:
   static SDL_Texture* texture;
-  static std::vector<Apple> all;
+  static std::shared_ptr<Mob> inst;
 
-  Apple();
+  glm::vec3 pos;
+
+  Mob();
 
   void update();
   void draw();

@@ -20,10 +20,10 @@ else()
 endif()
 
 add_executable(frankd
-  src/Apple.cpp
+  src/Mob.cpp
   src/Font.cpp
   src/main.cpp
-  src/Player.cpp
+  src/Camera.cpp
   src/util.cpp
   src/Monster.cpp
   src/Foot.cpp

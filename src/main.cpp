@@ -1,5 +1,5 @@
-#include "Player.h"
-#include "Apple.h"
+#include "Camera.h"
+#include "Mob.h"
 #include "util.h"
 #include "Monster.h"
 #include "Foot.h"
@@ -18,11 +18,7 @@ util::Font f;
 
 void update()
 {
-  for(auto it = Player::all.begin(); it != Player::all.end(); it++)
-  {
-    it->update();
-  }
-
+  Mob::inst->update();
   Monster::inst->update();
 }
 
@@ -37,27 +33,19 @@ void draw(int id)
     util::sdl_clearscreen(0, 100, 0);
   }
 
-  for(auto it = Player::all.begin(); it != Player::all.end(); it++)
-  {
-    it->draw();
-  }
 
-  for(auto it = Apple::all.begin(); it != Apple::all.end(); it++)
-  {
-    it->draw();
-  }
-
+  Camera::inst->draw();
+  Mob::inst->draw();
   Monster::inst->draw();
 
   std::stringstream ss;
-  ss << "Player: " << id;
-  f.draw(ss.str(), 500, 50);
+  ss << "Distance travelled: " << Monster::inst->getDistance();
+  f.draw(ss.str(), 10, 0);
 }
 
 void load_resources()
 {
-  Player::ss = util::SpritesheetLoad("resources/link.png", 10, 8);
-  Apple::texture = util::sdl_loadtexture("resources/heart.png");
+  Mob::texture = util::sdl_loadtexture("resources/mob.png");
   Foot::texture = util::sdl_loadtexture("resources/foot.png");
   Monster::texture = util::sdl_loadtexture("resources/body.png");
 
@@ -66,25 +54,19 @@ void load_resources()
 
 void cleanup()
 {
-  Player::all.clear();
-  Apple::all.clear();
+
 }
 
 int main()
 {
-  util::sdl_initialize("Zelda III Arena", 800, 600);
+  util::sdl_initialize("Frankendine", 800, 600);
   atexit(cleanup);
 
   load_resources();
 
-  Player::all.push_back(Player(1));
-  Player::all.push_back(Player(2));
-  Player::all.push_back(Player(3));
-  Player::all.push_back(Player(4));
-
-  Apple::all.push_back(Apple());
-
+  Camera::inst = std::make_shared<Camera>();
   Monster::inst = std::make_shared<Monster>();
+  Mob::inst = std::make_shared<Mob>();
 
   SDL_Event e = {0};
   bool quit = false;

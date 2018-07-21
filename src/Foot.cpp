@@ -9,6 +9,7 @@ SDL_Texture* Foot::texture;
 Foot::Foot(int id)
 {
   this->clientId = id;
+  pressure = false;
 
   if(id == 1)
   {
@@ -27,21 +28,37 @@ void Foot::update()
   int numkeys = 0;
   const Uint8* state = SDLD_GetKeyboardState(clientId, &numkeys);
 
-  util::Vec2 oldPos = pos;
+  glm::vec2 oldPos = pos;
+  pressure = false;
 
-  if(state[39])
+  if(state[38])
   {
-    pos.x ++;
+    if(!Monster::inst->hasFallen()) pos.y -= 300 * util::delta_time;
   }
-  else if(state[37])
+  else if(state[40])
   {
-    pos.x --;
+    if(!Monster::inst->hasFallen()) pos.y += 300 * util::delta_time;
+    pressure = true;
   }
+
+  if(!hasPressure())
+  {
+    if(state[39])
+    {
+      if(!Monster::inst->hasFallen()) pos.x += 300 * util::delta_time;
+    }
+    else if(state[37])
+    {
+      if(!Monster::inst->hasFallen()) pos.x -= 300 * util::delta_time;
+    }
+  }
+
+  if(Monster::inst->hasFallen()) pos.y += 300 * util::delta_time;
 
   collision(oldPos);
 }
 
-void Foot::collision(util::Vec2& oldPos)
+void Foot::collision(glm::vec2& oldPos)
 {
   std::shared_ptr<Foot> c;
 
@@ -67,6 +84,37 @@ void Foot::collision(util::Vec2& oldPos)
   {
     pos = oldPos;
   }
+
+  if(oldPos.x != pos.x)
+  {
+    while(glm::distance(pos, c->pos) > 150)
+    {
+      pos -= glm::normalize(pos - c->pos);
+    }
+  }
+
+/*
+  if(glm::distance(pos, c->pos) > 150)
+  {
+    pos.x = oldPos.x;
+  }
+*/
+
+  if(pos.y < 400) pos.y = 400;
+  if(pos.y > 500) pos.y = 500;
+}
+
+/*
+float Foot::getOffsetY()
+{
+  return 500 - pos.y;
+}
+*/
+
+bool Foot::hasPressure()
+{
+  if(pos.y < 490) return false;
+  return pressure;
 }
 
 void Foot::draw()

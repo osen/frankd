@@ -1,15 +1,20 @@
 #include "util.h"
 
+#include "glm/glm.hpp"
+
 struct Foot
 {
   static SDL_Texture* texture;
 
   int clientId;
-  util::Vec2 pos;
+  glm::vec2 pos;
+  bool pressure;
 
   Foot(int id);
   void update();
   void draw();
 
-  void collision(util::Vec2& oldPos);
+  void collision(glm::vec2& oldPos);
+  //float getOffsetY();
+  bool hasPressure();
 };

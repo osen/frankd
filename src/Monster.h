@@ -13,6 +13,8 @@ struct Monster
   std::shared_ptr<Foot> rightFoot;
   //std::shared_ptr<Hand> leftHand;
   //std::shared_ptr<Hand> rightHand;
+  float fallAmount;
+  bool hasFallen();
 
   Monster();
   void draw();

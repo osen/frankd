@@ -2,22 +2,15 @@
 
 #include "glm/glm.hpp"
 
-struct Foot
+struct Hand
 {
   static SDL_Texture* texture;
-  static util::Sound plod;
+  static util::Sound grab;
 
   int clientId;
   glm::vec2 pos;
-  bool pressure;
 
-  bool begunPressure;
-
-  Foot(int id);
+  Hand(int id);
   void update();
   void draw();
-
-  void collision(glm::vec2& oldPos);
-  //float getOffsetY();
-  bool hasPressure();
 };

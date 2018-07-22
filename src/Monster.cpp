@@ -1,5 +1,6 @@
 #include "Monster.h"
 #include "Foot.h"
+#include "Hand.h"
 #include "util.h"
 #include "Camera.h"
 
@@ -11,6 +12,8 @@ Monster::Monster()
 {
   leftFoot = std::make_shared<Foot>(1);
   rightFoot = std::make_shared<Foot>(2);
+  leftHand = std::make_shared<Hand>(3);
+  rightHand = std::make_shared<Hand>(4);
 
   fallAmount = 0;
   falling = true;
@@ -35,6 +38,8 @@ void Monster::update()
 {
   leftFoot->update();
   rightFoot->update();
+  leftHand->update();
+  rightHand->update();
 
   if(!leftFoot->hasPressure() && !rightFoot->hasPressure())
   {
@@ -64,7 +69,7 @@ void Monster::update()
 
 void Monster::draw()
 {
-  float middleX = (leftFoot->pos.x + rightFoot->pos.x) / 2;
+  float middleX = (leftFoot->pos.x + rightFoot->pos.x) / 2 - 25;
   glm::vec2 offset = Camera::inst->getOffset();
 
   SDL_Rect r = { 0 };
@@ -75,4 +80,6 @@ void Monster::draw()
 
   leftFoot->draw();
   rightFoot->draw();
+  leftHand->draw();
+  rightHand->draw();
 }

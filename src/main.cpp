@@ -4,6 +4,7 @@
 #include "Monster.h"
 #include "Foot.h"
 #include "Background.h"
+#include "Hand.h"
 
 #include <GL/glut.h>
 
@@ -61,6 +62,7 @@ void load_resources()
 {
   Mob::texture = util::sdl_loadtexture("resources/mob.png");
   Foot::texture = util::sdl_loadtexture("resources/foot.png");
+  Hand::texture = util::sdl_loadtexture("resources/hand.png");
   Monster::texture = util::sdl_loadtexture("resources/body.png");
   Background::grounds.push_back(util::sdl_loadtexture("resources/ground1.png"));
   Background::grounds.push_back(util::sdl_loadtexture("resources/ground2.png"));

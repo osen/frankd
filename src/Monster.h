@@ -3,6 +3,7 @@
 #include <memory>
 
 struct Foot;
+struct Hand;
 
 struct Monster
 {
@@ -12,8 +13,8 @@ struct Monster
 
   std::shared_ptr<Foot> leftFoot;
   std::shared_ptr<Foot> rightFoot;
-  //std::shared_ptr<Hand> leftHand;
-  //std::shared_ptr<Hand> rightHand;
+  std::shared_ptr<Hand> leftHand;
+  std::shared_ptr<Hand> rightHand;
   float fallAmount;
   bool hasFallen();
   float getDistance();

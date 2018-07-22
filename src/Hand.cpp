@@ -20,7 +20,7 @@ Hand::Hand(int id)
   else
   {
     pos.x = 650;
-    pos.y = 400;
+    pos.y = 450;
   }
 }
 

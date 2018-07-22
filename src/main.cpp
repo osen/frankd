@@ -32,12 +32,14 @@ void draw(int id)
 {
   if(id == 1)
   {
-    util::sdl_clearscreen(0, 0, 100);
+    //util::sdl_clearscreen(0, 0, 100);
   }
   else
   {
-    util::sdl_clearscreen(0, 100, 0);
+    //util::sdl_clearscreen(0, 100, 0);
   }
+
+  util::sdl_clearscreen(22, 49, 68);
 
   Camera::inst->draw();
   Background::inst->draw();
@@ -74,7 +76,7 @@ void load_resources()
   s.load("resources/welcome.ogg");
   lightning.load("resources/lightning.ogg");
   Monster::fall.load("resources/fall.ogg");
-  Foot::plod.load("resources/fall.ogg");
+  Foot::plod.load("resources/footstep.ogg");
 }
 
 void cleanup()

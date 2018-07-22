@@ -74,7 +74,7 @@ void Monster::draw()
 
   SDL_Rect r = { 0 };
   r.x = middleX + offset.x;
-  r.y = 300 + (1 * fallAmount) + offset.y;
+  r.y = 225 + (1 * fallAmount) + offset.y;
   SDL_QueryTexture(texture, NULL, NULL, &r.w, &r.h);
   SDL_RenderCopy(util::sdl_renderer, texture, NULL, &r);
 

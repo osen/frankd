@@ -34,9 +34,10 @@ void Background::draw()
     {
       r.x = curr + offset.x / 2;
       //r.y = -200 + th + offset.y;
-      r.y = 100;
-      r.h = glutGet(GLUT_WINDOW_HEIGHT);
+      //r.y = 100;
+      //r.h = glutGet(GLUT_WINDOW_HEIGHT);
       //r.h = th;
+      r.h = 500;
       SDL_RenderCopy(util::sdl_renderer, backgrounds.at(bt), NULL, &r);
     }
 
@@ -57,7 +58,7 @@ void Background::draw()
     if(curr > Camera::inst->pos.x - tw)
     {
       r.x = curr + offset.x;
-      r.y = 450 + offset.y;
+      r.y = 380 + offset.y;
       r.h = th;
       SDL_RenderCopy(util::sdl_renderer, grounds.at(gt), NULL, &r);
     }

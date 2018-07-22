@@ -83,10 +83,28 @@ void Foot::collision(glm::vec2& oldPos)
   b.x = c->pos.x;
   b.y = c->pos.y;
 
-  if(util::colliding(a, b))
+  float am = 1;
+
+  while(util::colliding(a, b))
   {
-    pos = oldPos;
+    a.x += am;
+    if(!util::colliding(a, b)) break;
+    a.x -= am;
+    a.x -= am;
+    if(!util::colliding(a, b)) break;
+    a.x += am;
+    a.y += am;
+    if(!util::colliding(a, b)) break;
+    a.y -= am;
+    a.y -= am;
+    if(!util::colliding(a, b)) break;
+    a.y += am;
+
+    am++;
   }
+
+  pos.x = a.x;
+  pos.y = a.y;
 
   if(oldPos.x != pos.x)
   {

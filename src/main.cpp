@@ -19,6 +19,7 @@
 
 util::Font f;
 util::Sound s;
+util::Sound lightning;
 
 void update()
 {
@@ -69,11 +70,21 @@ void load_resources()
 
   f.load("resources/font.png");
   s.load("resources/welcome.ogg");
+  lightning.load("resources/lightning.ogg");
+  Monster::fall.load("resources/fall.ogg");
+  Foot::plod.load("resources/fall.ogg");
 }
 
 void cleanup()
 {
 
+}
+
+void restart()
+{
+  Camera::inst = std::make_shared<Camera>();
+  Monster::inst = std::make_shared<Monster>();
+  Mob::inst = std::make_shared<Mob>();
 }
 
 int main()
@@ -83,9 +94,7 @@ int main()
 
   load_resources();
 
-  Camera::inst = std::make_shared<Camera>();
-  Monster::inst = std::make_shared<Monster>();
-  Mob::inst = std::make_shared<Mob>();
+  restart();
 
   SDL_Event e = {0};
   bool quit = false;
@@ -112,8 +121,11 @@ int main()
 
         if(!Mob::inst->wasUnleashed())
         {
+          lightning.play();
           Mob::inst->unleash();
         }
+
+        if(e.key.keysym.sym == 82) restart();
       }
       else if(e.type == SDL_KEYUP)
       {

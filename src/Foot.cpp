@@ -6,11 +6,13 @@
 #include <iostream>
 
 SDL_Texture* Foot::texture;
+util::Sound Foot::plod;
 
 Foot::Foot(int id)
 {
   this->clientId = id;
   pressure = false;
+  begunPressure = true;
 
   if(id == 1)
   {
@@ -57,6 +59,20 @@ void Foot::update()
   if(Monster::inst->hasFallen()) pos.y += 300 * util::delta_time;
 
   collision(oldPos);
+
+  if(pos.y < 490)
+  {
+    begunPressure = false;
+  }
+
+  if(!begunPressure)
+  {
+    if(hasPressure())
+    {
+      begunPressure = true;
+      plod.play();
+    }
+  }
 
   //pos.x += 1;
 }

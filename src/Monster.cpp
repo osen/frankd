@@ -5,6 +5,7 @@
 
 std::shared_ptr<Monster> Monster::inst;
 SDL_Texture* Monster::texture;
+util::Sound Monster::fall;
 
 Monster::Monster()
 {
@@ -12,6 +13,7 @@ Monster::Monster()
   rightFoot = std::make_shared<Foot>(2);
 
   fallAmount = 0;
+  falling = true;
 }
 
 bool Monster::hasFallen()
@@ -37,6 +39,15 @@ void Monster::update()
   if(!leftFoot->hasPressure() && !rightFoot->hasPressure())
   {
     fallAmount += 100 * util::delta_time;
+
+    if(!falling)
+    {
+      if(fallAmount > 50)
+      {
+        fall.play();
+        falling = true;
+      }
+    }
   }
   else
   {
@@ -44,7 +55,11 @@ void Monster::update()
   }
 
   if(fallAmount > 100) fallAmount = 100;
-  if(fallAmount < 0) fallAmount = 0;
+  if(fallAmount < 0)
+  {
+    fallAmount = 0;
+    falling = false;
+  }
 }
 
 void Monster::draw()

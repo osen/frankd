@@ -8,6 +8,7 @@ struct Monster
 {
   static std::shared_ptr<Monster> inst;
   static SDL_Texture* texture;
+  static util::Sound fall;
 
   std::shared_ptr<Foot> leftFoot;
   std::shared_ptr<Foot> rightFoot;
@@ -16,6 +17,8 @@ struct Monster
   float fallAmount;
   bool hasFallen();
   float getDistance();
+
+  bool falling;
 
   Monster();
   void draw();

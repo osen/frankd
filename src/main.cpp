@@ -24,8 +24,11 @@ util::Sound lightning;
 
 void update()
 {
-  Mob::inst->update();
-  Monster::inst->update();
+  if(!Mob::inst->hasCaught())
+  {
+    Mob::inst->update();
+    Monster::inst->update();
+  }
 }
 
 void draw(int id)
@@ -43,6 +46,7 @@ void draw(int id)
 
   Camera::inst->draw();
   Background::inst->draw();
+
   Mob::inst->draw();
   Monster::inst->draw();
 
@@ -56,6 +60,12 @@ void draw(int id)
   if(!Mob::inst->wasUnleashed())
   {
     std::string msg = "Press a key to unleash the mob!";
+    f.draw(msg, sw / 2 - f.getWidth(msg) / 2, sh / 2 - f.getHeight() / 2);
+  }
+
+  if(Mob::inst->hasCaught())
+  {
+    std::string msg = "Monster was caught by the mob! Press 'R' to restart!";
     f.draw(msg, sw / 2 - f.getWidth(msg) / 2, sh / 2 - f.getHeight() / 2);
   }
 }

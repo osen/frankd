@@ -17,6 +17,7 @@ public:
 
   void unleash();
   bool wasUnleashed();
+  bool hasCaught();
 
   void update();
   void draw();

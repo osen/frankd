@@ -1,5 +1,8 @@
 #include "Mob.h"
 #include "Camera.h"
+#include "Monster.h"
+
+#include <iostream>
 
 SDL_Texture* Mob::texture;
 std::shared_ptr<Mob> Mob::inst;
@@ -31,6 +34,20 @@ void Mob::draw()
   r.y = pos.y + offset.y;
   SDL_QueryTexture(texture, NULL, NULL, &r.w, &r.h);
   SDL_RenderCopy(util::sdl_renderer, texture, NULL, &r);
+}
+
+bool Mob::hasCaught()
+{
+  int width = 0;
+  int height = 0;
+  SDL_QueryTexture(texture, NULL, NULL, &width, &height);
+
+  if(pos.x + width - 100 > Monster::inst->getDistance())
+  {
+    return true;
+  }
+
+  return false;
 }
 
 void Mob::update()

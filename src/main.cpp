@@ -16,6 +16,7 @@
 #include <stdlib.h>
 
 util::Font f;
+util::Sound s;
 
 void update()
 {
@@ -33,7 +34,6 @@ void draw(int id)
   {
     util::sdl_clearscreen(0, 100, 0);
   }
-
 
   Camera::inst->draw();
   Background::inst->draw();
@@ -57,6 +57,7 @@ void load_resources()
   Background::backgrounds.push_back(util::sdl_loadtexture("resources/background2.png"));
 
   f.load("resources/font.png");
+  s.load("resources/welcome.ogg");
 }
 
 void cleanup()
@@ -96,6 +97,7 @@ int main()
       else if(e.type == SDL_KEYDOWN)
       {
         //std::cout << "Key Down: " << e.key.keysym.sym << std::endl;
+        s.play();
       }
       else if(e.type == SDL_KEYUP)
       {

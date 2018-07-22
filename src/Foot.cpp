@@ -57,6 +57,8 @@ void Foot::update()
   if(Monster::inst->hasFallen()) pos.y += 300 * util::delta_time;
 
   collision(oldPos);
+
+  //pos.x += 1;
 }
 
 void Foot::collision(glm::vec2& oldPos)

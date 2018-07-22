@@ -24,26 +24,8 @@ void Background::draw()
   while(true)
   {
     curr += tw;
-
-    gt++;
-    st++;
     bt++;
-
-    if(gt >= grounds.size())
-    {
-      gt = 0;
-    }
-
-    if(st >= skys.size())
-    {
-      st = 0;
-    }
-
-    if(bt >= backgrounds.size())
-    {
-      bt = 0;
-    }
-
+    if(bt >= backgrounds.size()) bt = 0;
     glm::vec2 offset = Camera::inst->getOffset();
     SDL_Rect r = { 0 };
     r.w = tw;
@@ -58,6 +40,20 @@ void Background::draw()
       SDL_RenderCopy(util::sdl_renderer, backgrounds.at(bt), NULL, &r);
     }
 
+    if(curr > Camera::inst->pos.x + tw * 2) break;
+  }
+
+  curr = -tw * 2;
+
+  while(true)
+  {
+    curr += tw;
+    gt++;
+    if(gt >= grounds.size()) gt = 0;
+    glm::vec2 offset = Camera::inst->getOffset();
+    SDL_Rect r = { 0 };
+    r.w = tw;
+
     if(curr > Camera::inst->pos.x - tw)
     {
       r.x = curr + offset.x;
@@ -65,6 +61,20 @@ void Background::draw()
       r.h = th;
       SDL_RenderCopy(util::sdl_renderer, grounds.at(gt), NULL, &r);
     }
+
+    if(curr > Camera::inst->pos.x + tw * 2) break;
+  }
+
+  curr = -tw * 2;
+
+  while(true)
+  {
+    curr += tw;
+    st++;
+    if(st >= skys.size()) st = 0;
+    glm::vec2 offset = Camera::inst->getOffset();
+    SDL_Rect r = { 0 };
+    r.w = tw;
 
     if(curr > Camera::inst->pos.x / 4 - tw)
     {
@@ -74,9 +84,6 @@ void Background::draw()
       SDL_RenderCopy(util::sdl_renderer, skys.at(st), NULL, &r);
     }
 
-    if(curr > Camera::inst->pos.x + tw * 2)
-    {
-      break;
-    }
+    if(curr > Camera::inst->pos.x + tw * 2) break;
   }
 }

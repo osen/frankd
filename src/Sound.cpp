@@ -80,6 +80,13 @@ struct SoundImpl
   }
 };
 
+Sound::Sound() { }
+
+Sound::Sound(std::string path)
+{
+  load(path);
+}
+
 void Sound::load(std::string path)
 {
   impl = std::make_shared<SoundImpl>();

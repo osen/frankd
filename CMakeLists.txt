@@ -30,6 +30,7 @@ add_executable(frankd
   src/Background.cpp
   src/Sound.cpp
   src/Hand.cpp
+  src/Overlay.cpp
 )
 
 target_link_libraries(frankd SDL2 GLD ws plank ws2_32 vorbisfile vorbis ogg openal32)

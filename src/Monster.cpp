@@ -6,7 +6,7 @@
 
 std::shared_ptr<Monster> Monster::inst;
 SDL_Texture* Monster::texture;
-util::Sound Monster::fall;
+std::vector<util::Sound> Monster::grunts;
 
 Monster::Monster()
 {
@@ -49,7 +49,8 @@ void Monster::update()
     {
       if(fallAmount > 50)
       {
-        fall.play();
+        grunts.at(util::rand(grunts.size() - 1)).play();
+        //fall.play();
         falling = true;
       }
     }

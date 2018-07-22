@@ -6,6 +6,7 @@
 #include <iostream>
 
 SDL_Texture* Hand::texture;
+SDL_Texture* Hand::texturel;
 util::Sound Hand::grab;
 
 Hand::Hand(int id)
@@ -66,5 +67,13 @@ void Hand::draw()
   r.x = pos.x + offset.x;
   r.y = pos.y + offset.y;
   SDL_QueryTexture(texture, NULL, NULL, &r.w, &r.h);
-  SDL_RenderCopy(util::sdl_renderer, texture, NULL, &r);
+
+  if(clientId == 3)
+  {
+    SDL_RenderCopy(util::sdl_renderer, texturel, NULL, &r);
+  }
+  else
+  {
+    SDL_RenderCopy(util::sdl_renderer, texture, NULL, &r);
+  }
 }

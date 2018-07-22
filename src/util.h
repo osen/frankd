@@ -32,6 +32,7 @@ extern double delta_time;
 
 bool colliding(SDL_Rect& a, SDL_Rect& b);
 
+int rand(int max);
 void sdl_initialize(std::string title, int width, int height);
 void update_deltatime();
 void sdl_clearscreen(int r, int g, int b);
@@ -67,6 +68,8 @@ class Sound
   std::shared_ptr<SoundImpl> impl;
 
 public:
+  Sound();
+  Sound(std::string path);
   void load(std::string path);
   void play(float vol, float varMin, float varMax);
   void play();

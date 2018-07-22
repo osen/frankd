@@ -22,6 +22,11 @@ namespace util
   ALCcontext* context;
   std::vector<ALuint> audioSources;
 
+  int rand(int max)
+  {
+    return ::rand() % (max + 1);
+  }
+
   void log(std::string message)
   {
     std::cout << "[util]" << message << std::endl;

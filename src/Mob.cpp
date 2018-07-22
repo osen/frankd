@@ -6,6 +6,7 @@
 
 SDL_Texture* Mob::texture;
 std::shared_ptr<Mob> Mob::inst;
+std::vector<util::Sound> Mob::shouts;
 
 Mob::Mob()
 {
@@ -13,6 +14,7 @@ Mob::Mob()
   pos.y = 100;
   speed = 10;
   unleashed = false;
+  shoutTimer = 1000;
 }
 
 void Mob::unleash()
@@ -55,4 +57,12 @@ void Mob::update()
   if(!unleashed) return;
   speed += 5 * util::delta_time;
   pos.x += speed * util::delta_time;
+
+  shoutTimer -= 1000 * util::delta_time;
+
+  if(shoutTimer <= 0)
+  {
+    shouts.at(util::rand(shouts.size() - 1)).play();
+    shoutTimer = util::rand(500);
+  }
 }

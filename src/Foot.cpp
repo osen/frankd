@@ -6,6 +6,7 @@
 #include <iostream>
 
 SDL_Texture* Foot::texture;
+SDL_Texture* Foot::texturel;
 util::Sound Foot::plod;
 
 Foot::Foot(int id)
@@ -161,5 +162,13 @@ void Foot::draw()
   r.x = pos.x + offset.x;
   r.y = pos.y + offset.y;
   SDL_QueryTexture(texture, NULL, NULL, &r.w, &r.h);
-  SDL_RenderCopy(util::sdl_renderer, texture, NULL, &r);
+
+  if(clientId == 1)
+  {
+    SDL_RenderCopy(util::sdl_renderer, texturel, NULL, &r);
+  }
+  else
+  {
+    SDL_RenderCopy(util::sdl_renderer, texture, NULL, &r);
+  }
 }

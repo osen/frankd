@@ -5,6 +5,7 @@
 struct Foot
 {
   static SDL_Texture* texture;
+  static SDL_Texture* texturel;
   static util::Sound plod;
 
   int clientId;

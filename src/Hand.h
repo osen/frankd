@@ -5,6 +5,7 @@
 struct Hand
 {
   static SDL_Texture* texture;
+  static SDL_Texture* texturel;
   static util::Sound grab;
 
   int clientId;

@@ -5,6 +5,7 @@
 #include "Foot.h"
 #include "Background.h"
 #include "Hand.h"
+#include "Overlay.h"
 
 #include <GL/glut.h>
 
@@ -49,6 +50,7 @@ void draw(int id)
 
   Mob::inst->draw();
   Monster::inst->draw();
+  Overlay::inst->draw();
 
   std::stringstream ss;
   ss << "Distance travelled: " << Monster::inst->getDistance();
@@ -74,18 +76,35 @@ void load_resources()
 {
   Mob::texture = util::sdl_loadtexture("resources/mob.png");
   Foot::texture = util::sdl_loadtexture("resources/foot.png");
+  Foot::texturel = util::sdl_loadtexture("resources/footl.png");
   Hand::texture = util::sdl_loadtexture("resources/hand.png");
+  Hand::texturel = util::sdl_loadtexture("resources/handl.png");
   Monster::texture = util::sdl_loadtexture("resources/body.png");
   Background::grounds.push_back(util::sdl_loadtexture("resources/ground1.png"));
   Background::grounds.push_back(util::sdl_loadtexture("resources/ground2.png"));
   Background::skys.push_back(util::sdl_loadtexture("resources/sky1.png"));
   Background::backgrounds.push_back(util::sdl_loadtexture("resources/background1.png"));
   Background::backgrounds.push_back(util::sdl_loadtexture("resources/background2.png"));
+  Overlay::texture = util::sdl_loadtexture("resources/overlay.png");
 
   f.load("resources/font.png");
   s.load("resources/welcome.ogg");
   lightning.load("resources/lightning.ogg");
-  Monster::fall.load("resources/fall.ogg");
+
+  for(int i = 1; i <= 15; i++)
+  {
+    std::stringstream ss;
+    ss << "resources/fgrunt_" << i << ".ogg";
+    Monster::grunts.push_back(util::Sound(ss.str()));
+  }
+
+  for(int i = 1; i <= 15; i++)
+  {
+    std::stringstream ss;
+    ss << "resources/fgrunt_" << i << ".ogg";
+    Mob::shouts.push_back(util::Sound(ss.str()));
+  }
+
   Foot::plod.load("resources/footstep.ogg");
 }
 
@@ -99,6 +118,7 @@ void restart()
   Camera::inst = std::make_shared<Camera>();
   Monster::inst = std::make_shared<Monster>();
   Mob::inst = std::make_shared<Mob>();
+  Overlay::inst = std::make_shared<Overlay>();
 }
 
 int main()

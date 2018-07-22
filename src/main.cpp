@@ -30,6 +30,8 @@ void update()
     Mob::inst->update();
     Monster::inst->update();
   }
+
+  Overlay::inst->update();
 }
 
 void draw(int id)
@@ -86,6 +88,7 @@ void load_resources()
   Background::backgrounds.push_back(util::sdl_loadtexture("resources/background1.png"));
   Background::backgrounds.push_back(util::sdl_loadtexture("resources/background2.png"));
   Overlay::texture = util::sdl_loadtexture("resources/overlay.png");
+  Overlay::texturel = util::sdl_loadtexture("resources/overlay_light.png");
   Overlay::lightning = util::Sound("resources/lightning.ogg");
 
   f.load("resources/font.png");
@@ -99,10 +102,10 @@ void load_resources()
     Monster::grunts.push_back(util::Sound(ss.str()));
   }
 
-  for(int i = 1; i <= 15; i++)
+  for(int i = 1; i <= 115; i++)
   {
     std::stringstream ss;
-    ss << "resources/fgrunt_" << i << ".ogg";
+    ss << "resources/mob/mob_" << i << ".ogg";
     Mob::shouts.push_back(util::Sound(ss.str()));
   }
 

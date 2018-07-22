@@ -37,11 +37,11 @@ void Foot::update()
 
   if(state[38])
   {
-    if(!Monster::inst->hasFallen()) pos.y -= 300 * util::delta_time;
+    if(!Monster::inst->hasFallen()) pos.y -= 400 * util::delta_time;
   }
   else if(state[40])
   {
-    if(!Monster::inst->hasFallen()) pos.y += 300 * util::delta_time;
+    if(!Monster::inst->hasFallen()) pos.y += 400 * util::delta_time;
     pressure = true;
   }
 
@@ -49,11 +49,11 @@ void Foot::update()
   {
     if(state[39])
     {
-      if(!Monster::inst->hasFallen()) pos.x += 300 * util::delta_time;
+      if(!Monster::inst->hasFallen()) pos.x += 400 * util::delta_time;
     }
     else if(state[37])
     {
-      if(!Monster::inst->hasFallen()) pos.x -= 300 * util::delta_time;
+      if(!Monster::inst->hasFallen()) pos.x -= 400 * util::delta_time;
     }
   }
 

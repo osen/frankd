@@ -63,6 +63,6 @@ void Mob::update()
   if(shoutTimer <= 0)
   {
     shouts.at(util::rand(shouts.size() - 1)).play();
-    shoutTimer = util::rand(500);
+    shoutTimer = util::rand(1000);
   }
 }

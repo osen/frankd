@@ -86,6 +86,7 @@ void load_resources()
   Background::backgrounds.push_back(util::sdl_loadtexture("resources/background1.png"));
   Background::backgrounds.push_back(util::sdl_loadtexture("resources/background2.png"));
   Overlay::texture = util::sdl_loadtexture("resources/overlay.png");
+  Overlay::lightning = util::Sound("resources/lightning.ogg");
 
   f.load("resources/font.png");
   s.load("resources/welcome.ogg");

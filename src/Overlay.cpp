@@ -1,13 +1,15 @@
 #include "Overlay.h"
+#include "Monster.h"
 
 #include <GL/glut.h>
 
 SDL_Texture* Overlay::texture;
 std::shared_ptr<Overlay> Overlay::inst;
+util::Sound Overlay::lightning;
 
 Overlay::Overlay()
 {
-
+  target = 1000;
 }
 
 void Overlay::draw()
@@ -21,5 +23,10 @@ void Overlay::draw()
 
 void Overlay::update()
 {
+  if(Monster::inst->getDistance() > target)
+  {
+    target += 1000;
 
+    lightning.play();
+  }
 }

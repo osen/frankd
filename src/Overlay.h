@@ -8,6 +8,8 @@ struct Overlay
   static SDL_Texture* texture;
   static util::Sound lightning;
 
+  float target;
+
   Overlay();
   void update();
   void draw();

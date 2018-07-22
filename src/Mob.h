@@ -10,8 +10,13 @@ public:
   static std::shared_ptr<Mob> inst;
 
   glm::vec3 pos;
+  float speed;
+  bool unleashed;
 
   Mob();
+
+  void unleash();
+  bool wasUnleashed();
 
   void update();
   void draw();

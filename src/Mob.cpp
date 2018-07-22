@@ -6,8 +6,20 @@ std::shared_ptr<Mob> Mob::inst;
 
 Mob::Mob()
 {
-  pos.x = -200;
+  pos.x = -300;
   pos.y = 100;
+  speed = 10;
+  unleashed = false;
+}
+
+void Mob::unleash()
+{
+  unleashed = true;
+}
+
+bool Mob::wasUnleashed()
+{
+  return unleashed;
 }
 
 void Mob::draw()
@@ -23,5 +35,7 @@ void Mob::draw()
 
 void Mob::update()
 {
-  pos.x += 10 * util::delta_time;
+  if(!unleashed) return;
+  speed += 5 * util::delta_time;
+  pos.x += speed * util::delta_time;
 }

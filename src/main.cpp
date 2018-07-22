@@ -5,6 +5,8 @@
 #include "Foot.h"
 #include "Background.h"
 
+#include <GL/glut.h>
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
@@ -43,6 +45,15 @@ void draw(int id)
   std::stringstream ss;
   ss << "Distance travelled: " << Monster::inst->getDistance();
   f.draw(ss.str(), 10, 0);
+
+  int sw = glutGet(GLUT_WINDOW_WIDTH);
+  int sh = glutGet(GLUT_WINDOW_HEIGHT);
+
+  if(!Mob::inst->wasUnleashed())
+  {
+    std::string msg = "Press a key to unleash the mob!";
+    f.draw(msg, sw / 2 - f.getWidth(msg) / 2, sh / 2 - f.getHeight() / 2);
+  }
 }
 
 void load_resources()
@@ -97,7 +108,12 @@ int main()
       else if(e.type == SDL_KEYDOWN)
       {
         //std::cout << "Key Down: " << e.key.keysym.sym << std::endl;
-        s.play();
+        //s.play();
+
+        if(!Mob::inst->wasUnleashed())
+        {
+          Mob::inst->unleash();
+        }
       }
       else if(e.type == SDL_KEYUP)
       {
